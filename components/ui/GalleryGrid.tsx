@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -5,7 +6,7 @@ type GalleryItem = {
   title: string;
   description: string;
   src: string;
-  href?: string;
+  href: string;
 };
 
 type GalleryGridProps = {
@@ -16,11 +17,9 @@ export default function GalleryGrid({ items }: GalleryGridProps) {
   return (
     <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
       {items.map((item) => (
-        <a
+        <Link
           key={item.title}
-          href={item.href ?? item.src}
-          target="_blank"
-          rel="noreferrer"
+          href={item.href}
           className="group overflow-hidden rounded-xl border border-white/10 bg-zinc-900/80 transition hover:-translate-y-1 hover:border-amber-400/40"
         >
           <Card className="overflow-hidden bg-transparent shadow-none">
@@ -36,7 +35,7 @@ export default function GalleryGrid({ items }: GalleryGridProps) {
               <p className="text-sm leading-6 text-gray-400">{item.description}</p>
             </CardContent>
           </Card>
-        </a>
+        </Link>
       ))}
     </div>
   );

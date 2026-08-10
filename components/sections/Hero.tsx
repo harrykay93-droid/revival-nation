@@ -7,8 +7,8 @@ import { motion } from "framer-motion";
 export default function Hero() {
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden">
-      <Image src="/images/about.png" alt="Revival Fire" fill priority className="object-cover" />
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(2,6,23,0.94),rgba(2,6,23,0.72))] backdrop-blur-sm" />
+      <Image src="/images/hero-bg.jpg" alt="Revival Fire" fill priority className="object-cover" />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(2,6,23,0.88),rgba(2,6,23,0.55))]" />
 
       <div className="relative z-10 mx-auto max-w-5xl px-6 text-center text-white">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>

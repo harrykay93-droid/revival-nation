@@ -24,7 +24,14 @@ export default async function GalleryAlbumPage({ params }: Params) {
       <MainLayout>
         <section className="min-h-screen bg-zinc-950 px-6 py-24 text-white">
           <div className="mx-auto max-w-6xl">
-            <SectionTitle title="Album not found" subtitle="The gallery album you requested does not exist." />
+            <div className="mb-6 flex items-center justify-between gap-4">
+              <SectionTitle title="Album not found" subtitle="The gallery album you requested does not exist." />
+              <Link href="/gallery">
+                <Button variant="ghost" size="sm">
+                  ← Back to Gallery
+                </Button>
+              </Link>
+            </div>
           </div>
         </section>
       </MainLayout>
