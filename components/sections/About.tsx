@@ -25,7 +25,7 @@ export default function About() {
         </div>
 
         <div>
-          <Image src="/images/about.jpg" alt="Revival" width={600} height={700} className="rounded-3xl border border-white/10 shadow-2xl shadow-black/40" />
+          <Image src="/images/about.png" alt="Revival" width={600} height={700} className="rounded-3xl border border-white/10 shadow-2xl shadow-black/40" />
         </div>
       </div>
     </RevealSection>
