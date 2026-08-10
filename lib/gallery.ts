@@ -25,7 +25,11 @@ function formatAlbumName(folderName: string) {
 }
 
 function getAlbumSlug(folderName: string) {
-  return folderName.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
+  return folderName.toLowerCase().replace(/[\s_]+/g, "-").replace(/[^a-z0-9-]/g, "");
+}
+
+function normalizeSlug(value: string) {
+  return value.toLowerCase().replace(/[^a-z0-9]/g, "");
 }
 
 async function loadAlbums() {
@@ -130,8 +134,9 @@ export const getGalleryItems = cache(async (): Promise<GalleryItem[]> => {
 
 export const getGalleryAlbum = cache(async (albumSlug: string): Promise<GalleryAlbum | null> => {
   try {
+    const normalizedRequestedSlug = normalizeSlug(albumSlug);
     const albums = await getGalleryAlbums();
-    return albums.find((album) => album.slug === albumSlug) ?? null;
+    return albums.find((album) => normalizeSlug(album.slug) === normalizedRequestedSlug) ?? null;
   } catch {
     return null;
   }
