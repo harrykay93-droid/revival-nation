@@ -1,29 +1,12 @@
-"use client";
-
 import Link from "next/link";
 import GalleryGrid from "@/components/ui/GalleryGrid";
 import { Button } from "@/components/ui/button";
 import SectionTitle from "@/components/ui/SectionTitle";
+import { getGalleryItems } from "@/lib/gallery";
 
-const galleryItems = [
-  {
-    title: "Worship Night",
-    description: "A sacred time of worship, prayer, and unity.",
-    src: "/images/hero-bg.jpg.jpg",
-  },
-  {
-    title: "Prayer Gathering",
-    description: "A faithful community gathering in expectation.",
-    src: "/images/about.jpg.png",
-  },
-  {
-    title: "Outreach Moment",
-    description: "Moments of love, compassion, and kingdom impact.",
-    src: "/images/revival-logo.png.png",
-  },
-];
+export default async function GalleryPreview() {
+  const galleryItems = await getGalleryItems();
 
-export default function GalleryPreview() {
   return (
     <section className="bg-zinc-950 py-24 text-white">
       <div className="mx-auto max-w-6xl px-6">
