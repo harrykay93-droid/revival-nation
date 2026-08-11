@@ -10,8 +10,8 @@ const values = [
 ];
 
 const leaders = [
-  { name: "Minister Adekunle Harrison", role: "Convener/Visionary" },
-  { name: "Minister Toluwalope Akinde", role: "Ministry Coordinator" },
+  { name: "Pastor Akin Adesina", role: "Founding Director" },
+  { name: "Minister Sarah Adesina", role: "Ministry Coordinator" },
 ];
 
 export default function AboutPage() {

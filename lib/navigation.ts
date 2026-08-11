@@ -6,5 +6,5 @@ export const navigation = [
   { label: "Prayer", href: "/prayer" },
   { label: "Testimonies", href: "/testimonies" },
   { label: "Gallery", href: "/gallery" },
-  { label: "Contact", href: "/Contact" },
+  { label: "Contact", href: "/contact" },
 ];

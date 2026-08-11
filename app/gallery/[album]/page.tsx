@@ -5,19 +5,14 @@ import SectionTitle from "@/components/ui/SectionTitle";
 import { Button } from "@/components/ui/button";
 import { getGalleryAlbum, getGalleryAlbums } from "@/lib/gallery";
 
-type Params = {
-  params: {
-    album: string;
-  };
-};
-
 export async function generateStaticParams() {
   const albums = await getGalleryAlbums();
   return albums.map((album) => ({ album: album.slug }));
 }
 
-export default async function GalleryAlbumPage({ params }: Params) {
-  const album = await getGalleryAlbum(params.album);
+export default async function GalleryAlbumPage({ params }: { params: Promise<{ album: string }> }) {
+  const { album: albumSlug } = await params;
+  const album = await getGalleryAlbum(albumSlug);
 
   if (!album) {
     return (
