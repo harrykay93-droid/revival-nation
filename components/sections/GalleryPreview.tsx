@@ -7,19 +7,22 @@ import SectionTitle from "@/components/ui/SectionTitle";
 
 const galleryItems = [
   {
-    title: "Worship Night",
-    description: "A sacred time of worship, prayer, and unity.",
-    src: "/images/hero-bg.jpg.jpg",
+    title: "May 2025 You Can Album",
+    description: "65 photos capturing worship, fellowship, and ministry moments.",
+    src: "/images/hero-bg.jpg",
+    href: "/gallery/may-2025-you-can",
   },
   {
-    title: "Prayer Gathering",
-    description: "A faithful community gathering in expectation.",
-    src: "/images/about.jpg.png",
+    title: "Revival Hour Sept 2025",
+    description: "36 photos of intense prayer, praise, and community encounter.",
+    src: "/images/about.png",
+    href: "/gallery/revival-hour-sept-2025",
   },
   {
-    title: "Outreach Moment",
+    title: "Outreach & Community",
     description: "Moments of love, compassion, and kingdom impact.",
-    src: "/images/revival-logo.png.png",
+    src: "/images/revival-logo.png",
+    href: "/gallery",
   },
 ];
 
@@ -34,7 +37,7 @@ export default function GalleryPreview() {
         <div className="mt-10 flex justify-center">
           <Link href="/gallery">
             <Button variant="outline" className="border-amber-500 text-amber-400 hover:bg-amber-500 hover:text-black">
-              View Full Gallery
+              View Full Gallery & All Albums
             </Button>
           </Link>
         </div>
