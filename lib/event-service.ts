@@ -45,52 +45,6 @@ function createId() {
   return `${Date.now()}-${Math.random().toString(16).slice(2)}`;
 }
 
-function buildConfirmationHtml(name: string, reference: string) {
-  return `
-    <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #111827;">
-      <h2 style="color: #b45309;">Thank you for registering with Revival Nation</h2>
-      <p>Hi ${name},</p>
-      <p>Thank you for registering for Revival Fire 2026. We are excited to welcome you and pray that this time will be a powerful moment of renewal.</p>
-      <p>Your reference number is <strong>${reference}</strong>.</p>
-      <p>Please keep this reference handy for check-in at the venue.</p>
-      <hr style="border-color: #e5e7eb; margin: 24px 0;" />
-      <h3 style="margin-bottom: 0.5rem;">Next Program</h3>
-      <p>We are already preparing our next Revival Nation gathering. You will receive another email soon with the date, location, and schedule for the next program.</p>
-      <p>If you have any questions, feel free to reply to this message or contact us at <strong>revivalnation40@gmail.com</strong>.</p>
-      <p style="margin-top: 1.5rem;">With love,<br />Revival Nation Ministry</p>
-    </div>
-  `;
-}
-
-async function sendConfirmationEmail(recipient: string, name: string, reference: string) {
-  const resendApiKey = process.env.RESEND_API_KEY;
-  const resendFrom = process.env.RESEND_FROM_EMAIL;
-
-  if (!resendApiKey || !resendFrom) {
-    return { ok: true, skipped: true };
-  }
-
-  const response = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${resendApiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      from: resendFrom,
-      to: [recipient],
-      subject: "Thank you for registering — Revival Fire 2026",
-      html: buildConfirmationHtml(name, reference),
-    }),
-  });
-
-  if (!response.ok) {
-    throw new Error(`Email delivery failed: ${response.status}`);
-  }
-
-  return { ok: true, skipped: false };
-}
-
 export async function saveRegistration(payload: RegistrationPayload) {
   const record: RegistrationRecord = {
     ...payload,
@@ -120,7 +74,8 @@ export async function saveRegistration(payload: RegistrationPayload) {
       throw error;
     }
 
-    await sendConfirmationEmail(record.email, record.fullName, record.id);
+  // Email confirmation is handled server-side in /api/register.
+  // This function is kept for direct Supabase use (e.g. admin tools).
 
     return {
       ok: true,

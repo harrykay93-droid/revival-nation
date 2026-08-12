@@ -3,7 +3,7 @@
 import { useState } from "react";
 import QRCode from "qrcode";
 import { Button } from "@/components/ui/button";
-import { saveRegistration, type RegistrationRecord } from "@/lib/event-service";
+import type { RegistrationRecord } from "@/lib/event-service";
 import { CheckCircle2, Download, Printer, RefreshCw } from "lucide-react";
 
 type FormState = {
@@ -61,7 +61,13 @@ export default function RegistrationForm() {
     setIsSubmitting(true);
 
     try {
-      const res = await saveRegistration(form);
+      const response = await fetch("/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      const res: { ok: boolean; message?: string; data?: RegistrationRecord } =
+        await response.json();
       if (res.ok && res.data) {
         setTicketData(res.data);
         const qrDataUrl = await QRCode.toDataURL(res.data.id, { margin: 2, width: 240 });
