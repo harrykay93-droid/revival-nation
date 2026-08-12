@@ -23,6 +23,8 @@ create table if not exists public.contact_messages (
   name text not null,
   email text not null,
   message text not null,
+  "email_sent" boolean not null default false,
+  "admin_notified" boolean not null default false,
   "created_at" timestamptz not null default now()
 );
 
@@ -43,3 +45,6 @@ create policy "Allow anon insert contact messages" on public.contact_messages
 
 create policy "Allow anon select contact messages" on public.contact_messages
   for select using (true);
+
+create policy "Allow anon update contact messages" on public.contact_messages
+  for update using (true) with check (true);

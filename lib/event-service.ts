@@ -22,6 +22,8 @@ export type RegistrationPayload = {
 export type ContactPayload = {
   name: string;
   email: string;
+  phone?: string;
+  subject?: string;
   message: string;
 };
 
@@ -35,6 +37,8 @@ export type RegistrationRecord = RegistrationPayload & {
 export type ContactRecord = ContactPayload & {
   id: string;
   created_at: string;
+  email_sent?: boolean;
+  admin_notified?: boolean;
 };
 
 function createId() {
@@ -94,10 +98,51 @@ export async function saveRegistration(payload: RegistrationPayload) {
 }
 
 export async function saveContactMessage(payload: ContactPayload) {
+  try {
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    // Guard: parse JSON only if response is actually JSON (prevents HTML 404 pages from throwing)
+    let result: Record<string, unknown> = {};
+    const contentType = response.headers.get("content-type") ?? "";
+    if (contentType.includes("application/json")) {
+      result = await response.json();
+    }
+
+    if (response.ok && result.ok) {
+      return {
+        ok: true,
+        stored: result.stored as boolean,
+        message: (result.message as string) || "Message sent successfully.",
+        data: result.data as ContactRecord,
+      };
+    }
+
+    if (!response.ok) {
+      // API route returned an error — fall through to Supabase fallback
+      console.error(`[event-service] /api/contact returned HTTP ${response.status}. Falling back.`);
+    } else {
+      return {
+        ok: false,
+        stored: false,
+        message: (result.message as string) || "Unable to send your message right now.",
+        data: { ...payload, id: createId(), created_at: new Date().toISOString() } as ContactRecord,
+      };
+    }
+  } catch (err) {
+    console.error("[event-service] saveContactMessage fetch error, falling back to client Supabase:", err);
+  }
+
+  // Fallback to direct client-side Supabase if API endpoint fails or is unavailable
   const record: ContactRecord = {
     ...payload,
     id: createId(),
     created_at: new Date().toISOString(),
+    email_sent: false,
+    admin_notified: false,
   };
 
   if (!supabase) {
@@ -110,9 +155,23 @@ export async function saveContactMessage(payload: ContactPayload) {
   }
 
   try {
+    const extraDetails = [];
+    if (payload.subject) extraDetails.push(`Subject: ${payload.subject}`);
+    if (payload.phone) extraDetails.push(`Phone: ${payload.phone}`);
+
+    const dbMessage = extraDetails.length > 0
+      ? `${extraDetails.join(" | ")}\n\n${payload.message}`
+      : payload.message;
+
     const { data, error } = await supabase
       .from("contact_messages")
-      .insert(record)
+      .insert({
+        id: record.id,
+        name: record.name,
+        email: record.email,
+        message: dbMessage,
+        created_at: record.created_at,
+      })
       .select()
       .single();
 
@@ -127,11 +186,36 @@ export async function saveContactMessage(payload: ContactPayload) {
       data: data as ContactRecord,
     };
   } catch (error) {
+    console.error("[event-service] Supabase fallback insert error:", error);
     return {
       ok: false,
       stored: false,
-      message: error instanceof Error ? error.message : "Unable to save your message right now.",
+      message: "We could not save your message right now. Please try again or email us directly at revivalnation40@gmail.com.",
       data: record,
+    };
+  }
+}
+
+export async function resendConfirmationEmail(identifier: { registrationId?: string; email?: string }) {
+  try {
+    const response = await fetch("/api/resend-confirmation", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(identifier),
+    });
+
+    const result = await response.json();
+    return {
+      ok: response.ok && result.ok,
+      emailSent: result.emailSent ?? false,
+      message: result.message || "Processed resend request.",
+      data: result.data as RegistrationRecord | undefined,
+    };
+  } catch (err) {
+    return {
+      ok: false,
+      emailSent: false,
+      message: err instanceof Error ? err.message : "Network error during resend attempt.",
     };
   }
 }
