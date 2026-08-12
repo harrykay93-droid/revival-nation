@@ -12,18 +12,66 @@ function getSupabase() {
   return createClient(url, key);
 }
 
-// ── Gmail SMTP transporter (built lazily so missing vars don't crash at import time) ──
-function getTransporter() {
-  const user = process.env.GMAIL_USER;
-  const pass = process.env.GMAIL_APP_PASSWORD;
-  if (!user || !pass) return null;
+// ── Send email helper supporting Resend API & Nodemailer Gmail SMTP ──
+async function sendConfirmationEmail(toEmail: string, name: string, reference: string): Promise<boolean> {
+  const senderEmail = process.env.GMAIL_USER || process.env.EMAIL_FROM || "revivalnation40@gmail.com";
+  const htmlContent = buildConfirmationHtml(name, reference);
+  const subject = "Thank you for registering — Revival Fire 2026";
 
-  return nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,
-    secure: false, // STARTTLS
-    auth: { user, pass },
-  });
+  // 1. Try Resend API if RESEND_API_KEY is configured
+  const resendApiKey = process.env.RESEND_API_KEY;
+  if (resendApiKey) {
+    try {
+      const res = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${resendApiKey}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          from: `Revival Nation <${senderEmail}>`,
+          to: [toEmail],
+          subject,
+          html: htmlContent,
+        }),
+      });
+
+      if (res.ok) {
+        return true;
+      }
+      const errData = await res.json();
+      console.error("[register] Resend API error:", errData);
+    } catch (err) {
+      console.error("[register] Resend API fetch failed:", err);
+    }
+  }
+
+  // 2. Try Nodemailer Gmail SMTP if GMAIL_APP_PASSWORD is configured
+  const gmailPass = process.env.GMAIL_APP_PASSWORD;
+  if (gmailPass) {
+    try {
+      const transporter = nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 587,
+        secure: false, // STARTTLS
+        auth: { user: senderEmail, pass: gmailPass },
+      });
+
+      await transporter.sendMail({
+        from: `"Revival Nation" <${senderEmail}>`,
+        to: toEmail,
+        subject,
+        html: htmlContent,
+      });
+
+      return true;
+    } catch (err) {
+      console.error("[register] Gmail SMTP failed:", err);
+    }
+  }
+
+  console.warn("[register] Neither RESEND_API_KEY nor GMAIL_APP_PASSWORD is configured. Email sending skipped.");
+  return false;
 }
 
 // ── Email HTML ──
@@ -100,35 +148,24 @@ export async function POST(request: NextRequest) {
   const savedRecord = inserted as RegistrationRecord;
 
   // ── 3. Send confirmation email ──
-  const transporter = getTransporter();
-  let emailSent = false;
-
-  if (transporter) {
-    try {
-      await transporter.sendMail({
-        from: `"Revival Nation" <${process.env.GMAIL_USER}>`,
-        to: savedRecord.email,
-        subject: "Thank you for registering — Revival Fire 2026",
-        html: buildConfirmationHtml(savedRecord.fullName, savedRecord.id),
-      });
-      emailSent = true;
-    } catch (emailError) {
-      // Log the error server-side but don't fail the whole registration
-      console.error("[register] Email delivery failed:", emailError);
-      emailSent = false;
-    }
-  }
+  const emailSent = await sendConfirmationEmail(savedRecord.email, savedRecord.fullName, savedRecord.id);
 
   // ── 4. Update confirmation_sent in Supabase ──
-  await supabase
+  const { error: updateError } = await supabase
     .from("registrations")
     .update({ confirmation_sent: emailSent })
     .eq("id", savedRecord.id);
 
+  if (updateError) {
+    console.error("[register] Failed to update confirmation_sent in Supabase:", updateError);
+  }
+
   return NextResponse.json({
     ok: true,
     stored: true,
-    message: "Registration saved successfully.",
+    message: emailSent
+      ? "Registration saved and confirmation email sent."
+      : "Registration saved, but confirmation email could not be sent.",
     data: { ...savedRecord, confirmation_sent: emailSent } as RegistrationRecord,
   });
 }

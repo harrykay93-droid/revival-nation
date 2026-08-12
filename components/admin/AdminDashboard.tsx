@@ -50,7 +50,7 @@ export default function AdminDashboard({ registrations: initialRegistrations, co
   function exportCSV() {
     if (!registrations.length) return;
 
-    const headers = ["ID", "Full Name", "Email", "Phone", "Gender", "Age Range", "Church", "Address", "Occupation", "Source", "Follow Up", "Prayer Request", "Checked In", "Created At"];
+    const headers = ["ID", "Full Name", "Email", "Phone", "Gender", "Age Range", "Church", "Address", "Occupation", "Source", "Follow Up", "Prayer Request", "Email Sent", "Checked In", "Created At"];
     const rows = registrations.map((r) => [
       `"${r.id}"`,
       `"${r.fullName.replace(/"/g, '""')}"`,
@@ -64,6 +64,7 @@ export default function AdminDashboard({ registrations: initialRegistrations, co
       `"${(r.source || "").replace(/"/g, '""')}"`,
       `"${r.followUp}"`,
       `"${(r.prayerRequest || "").replace(/"/g, '""')}"`,
+      r.confirmation_sent ? "Yes" : "No",
       r.checked_in ? "Yes" : "No",
       `"${r.created_at}"`,
     ]);
@@ -197,7 +198,18 @@ export default function AdminDashboard({ registrations: initialRegistrations, co
                     <div>
                       <p className="font-semibold text-white text-base">{registration.fullName}</p>
                       <p className="text-sm text-gray-400">{registration.email} • {registration.phone}</p>
-                      <p className="text-xs font-mono text-amber-400/80 mt-1">ID: {registration.id}</p>
+                      <div className="flex items-center gap-2 mt-1">
+                        <span className="text-xs font-mono text-amber-400/80">ID: {registration.id}</span>
+                        <span
+                          className={`rounded-full px-2 py-0.5 text-[10px] font-medium border ${
+                            registration.confirmation_sent
+                              ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
+                              : "bg-zinc-800 text-gray-400 border-white/10"
+                          }`}
+                        >
+                          {registration.confirmation_sent ? "Email Sent" : "Email Not Sent"}
+                        </span>
+                      </div>
                     </div>
 
                     <div className="flex items-center gap-2">
