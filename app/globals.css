@@ -125,9 +125,52 @@ html {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-[#020617] text-white antialiased selection:bg-amber-500 selection:text-black;
   }
   html {
     @apply font-sans;
+  }
+}
+
+@keyframes fireGlow {
+  0%, 100% {
+    box-shadow: 0 0 25px rgba(245, 158, 11, 0.15), 0 0 50px rgba(185, 28, 28, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(245, 158, 11, 0.25), 0 0 70px rgba(185, 28, 28, 0.2);
+  }
+}
+
+@keyframes floatLight {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(-12px) scale(1.05);
+    opacity: 0.7;
+  }
+}
+
+.fire-glow-card {
+  animation: fireGlow 6s ease-in-out infinite;
+}
+
+.float-light {
+  animation: floatLight 8s ease-in-out infinite;
+}
+
+.gold-gradient-text {
+  background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 50%, #D97706 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
