@@ -62,7 +62,7 @@ export default function Countdown() {
         {timeLeft.isFinished ? (
           <div className="mt-10 rounded-3xl border border-amber-500/40 bg-black/60 p-8 shadow-2xl backdrop-blur-md">
             <h3 className="text-3xl font-black text-amber-400 sm:text-5xl">
-              REVIVAL FIRE 2026 IS HERE!
+              THANK YOU FOR ATTENDING REVIVAL FIRE 2026
             </h3>
             <p className="mt-3 text-gray-200">
               The gathering has begun. Join us at RCCG Calvary Parish Car Park, Itire, Surulere, Lagos.
@@ -103,4 +103,4 @@ export default function Countdown() {
       </div>
     </RevealSection>
   );
-}
+}
