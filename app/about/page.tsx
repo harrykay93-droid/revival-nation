@@ -21,7 +21,7 @@ const leaders = [
     photo: "/team/toluwalope-akinde.png",
   },
   {
-    name: "Dairo Joshua",
+    name: "Dairo Adeoluwa Joshua",
     role: "Executive Team",
     photo: "/team/dairo-joshua.png",
   },
