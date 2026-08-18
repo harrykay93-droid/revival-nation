@@ -1,7 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { navigation } from "@/lib/navigation";
-import { MapPin, Calendar, Clock } from "lucide-react";
+import { MapPin, Mail, Clock, Heart, Sparkles } from "lucide-react";
+import { siteConfig } from "@/lib/site";
 
 export default function Footer() {
   return (
@@ -25,14 +26,23 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-sm leading-relaxed text-gray-400">
-              “Raising a generation that carries the fire of GOD.”
+              “Raising a generation that carries the fire of GOD.” A ministry dedicated to awakening hearts, prevailing prayer, and kingdom impact.
             </p>
+            <div className="pt-2 flex items-center gap-3">
+              <Link
+                href="/give"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-400 hover:text-amber-300 transition"
+              >
+                <Heart className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
+                Support the Mission
+              </Link>
+            </div>
           </div>
 
           {/* Quick Links Column */}
           <div>
             <h4 className="text-sm font-bold uppercase tracking-wider text-amber-400">
-              Quick Links
+              Navigation
             </h4>
             <ul className="mt-4 space-y-2.5 text-sm">
               {navigation.map((item) => (
@@ -48,48 +58,66 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Event Details Column */}
+          {/* Gathering & Schedule Column */}
           <div>
             <h4 className="text-sm font-bold uppercase tracking-wider text-amber-400">
-              REVIVAL FIRE 2026
+              Gathering Schedule
             </h4>
             <ul className="mt-4 space-y-3 text-sm text-gray-400">
               <li className="flex items-start gap-2.5">
-                <Calendar className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
-                <span>15 August 2026</span>
+                <Clock className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
+                <div>
+                  <p className="font-semibold text-gray-200">Online Prayer Altar</p>
+                  <p className="text-xs text-gray-400">Every Tue & Thu — 8:00 PM</p>
+                </div>
               </li>
               <li className="flex items-start gap-2.5">
-                <Clock className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
-                <span>3:00 PM Prompt</span>
+                <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
+                <div>
+                  <p className="font-semibold text-gray-200">Monthly Revival Hour</p>
+                  <p className="text-xs text-gray-400">Last Saturday — 4:00 PM</p>
+                </div>
               </li>
               <li className="flex items-start gap-2.5">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
-                <span>RCCG Calvary Parish Car Park, Itire, Surulere, Lagos</span>
+                <div>
+                  <p className="font-semibold text-gray-200">Central Fellowship</p>
+                  <p className="text-xs text-gray-400">{siteConfig.contact.address}</p>
+                </div>
               </li>
             </ul>
           </div>
 
-          {/* Call to Action Column */}
+          {/* Connect & Outreach Column */}
           <div className="space-y-4">
             <h4 className="text-sm font-bold uppercase tracking-wider text-amber-400">
-              Join the Movement
+              Connect With Us
             </h4>
             <p className="text-sm text-gray-400 leading-relaxed">
-              Be part of what GOD is doing in this generation. Secure your place for Revival Fire 2026 today.
+              Have questions, need prayer, or want to invite our ministry team? Reach out anytime.
             </p>
-            <Link
-              href="/register"
-              className="inline-flex w-full items-center justify-center rounded-xl bg-amber-500 px-5 py-3 text-center text-sm font-bold text-black shadow-lg shadow-amber-500/10 transition hover:bg-amber-400 active:scale-[0.98]"
-            >
-              REGISTER NOW
-            </Link>
+            <div className="flex items-center gap-2 text-sm text-amber-400">
+              <Mail className="h-4 w-4 shrink-0" />
+              <a href={`mailto:${siteConfig.contact.email}`} className="hover:underline text-xs sm:text-sm break-all">
+                {siteConfig.contact.email}
+              </a>
+            </div>
+            <div className="pt-2">
+              <Link
+                href="/prayer"
+                className="inline-flex w-full items-center justify-center rounded-xl border border-amber-500/40 bg-amber-500/10 px-4 py-2.5 text-center text-xs font-bold text-amber-300 shadow-md transition hover:bg-amber-500 hover:text-black"
+              >
+                SUBMIT PRAYER REQUEST
+              </Link>
+            </div>
           </div>
         </div>
 
-        <div className="mt-14 border-t border-white/10 pt-8 text-center text-xs text-gray-500">
-          <p>© 2026 Revival Nation. All Rights Reserved.</p>
+        <div className="mt-14 border-t border-white/10 pt-8 text-center text-xs text-gray-500 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p>© {new Date().getFullYear()} Revival Nation Ministry. All Rights Reserved.</p>
+          <p className="text-gray-400">Igniting hearts with the presence and power of God.</p>
         </div>
       </div>
     </footer>
   );
-}
+}
