@@ -3,33 +3,39 @@
 import Link from "next/link";
 import RevealSection from "@/components/ui/RevealSection";
 import SectionTitle from "@/components/ui/SectionTitle";
-import { Clock, Calendar, Globe, MapPin, ArrowRight, Flame } from "lucide-react";
+import { Clock, Calendar, Globe, MapPin, ArrowRight, Flame, Sparkles } from "lucide-react";
 
 export default function WeeklySchedule() {
   const schedules = [
     {
-      title: "Online Intercessory Watch",
-      frequency: "Every Tuesday & Thursday",
-      time: "8:00 PM — 9:30 PM (WAT)",
-      mode: "Virtual (Google Meet & Mixlr)",
+      title: "Online Intercessory Altar",
+      tag: "Weekly",
+      frequency: "Every Monday",
+      time: "9:00 PM (WAT)",
+      mode: "Online (Virtual Altar)",
       icon: Globe,
-      description: "A focused altar of prayer, warfare, and intercession for families, ministries, and the nation.",
+      description:
+        "A focused space of passionate prayer, spiritual warfare, and seeking the Lord for souls and revival.",
     },
     {
       title: "Monthly Revival Hour",
-      frequency: "Last Saturday of Each Month",
-      time: "4:00 PM — 6:30 PM",
-      mode: "In-Person & Live Stream",
+      tag: "Monthly",
+      frequency: "Once Every Month",
+      time: "Sacred Service",
+      mode: "Different Churches / Stream",
       icon: Flame,
-      description: "An intensive atmosphere of extended worship, practical biblical teaching, and the prophetic move.",
+      description:
+        "A dedicated sacred service characterized by deep worship, prophetic teaching, and intense prayers.",
     },
     {
-      title: "Youth & Campus Discipleship",
-      frequency: "2nd & 4th Sunday",
-      time: "5:00 PM — 7:00 PM",
-      mode: "Fellowship Grounds",
-      icon: Calendar,
-      description: "Equipping young adults and students to stand unashamed for Christ on campuses and in careers.",
+      title: "Yearly Crusade",
+      tag: "Yearly",
+      frequency: "Every August",
+      time: "Major Annual Gathering",
+      mode: "Open Air / Open Space",
+      icon: Sparkles,
+      description:
+        "Major event of the Year characterized by intense prayers, worship, and the word.",
     },
   ];
 
@@ -37,8 +43,8 @@ export default function WeeklySchedule() {
     <RevealSection id="schedule" className="bg-[#020617] py-24 text-white border-t border-white/5">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <SectionTitle
-          title="WEEKLY & MONTHLY GATHERINGS"
-          subtitle="Stay rooted and consistently fueled. Join our regular fellowship and prayer altars."
+          title="REGULAR GATHERINGS & CRUSADES"
+          subtitle="Stay rooted and consistently fueled. Join our regular fellowship, sacred assemblies, and crusades."
         />
 
         <div className="mt-14 grid gap-8 md:grid-cols-3">
@@ -54,8 +60,8 @@ export default function WeeklySchedule() {
                     <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-amber-500/30 bg-amber-500/10 text-amber-400 group-hover:scale-110 transition-transform">
                       <Icon className="h-6 w-6" />
                     </div>
-                    <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-[11px] font-semibold text-amber-300">
-                      {item.frequency}
+                    <span className="rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-[11px] font-bold text-amber-400">
+                      {item.tag}
                     </span>
                   </div>
 
@@ -64,6 +70,10 @@ export default function WeeklySchedule() {
                   </h3>
 
                   <div className="mt-4 space-y-2 text-xs text-gray-300">
+                    <div className="flex items-center gap-2">
+                      <Calendar className="h-4 w-4 text-amber-400 shrink-0" />
+                      <span>{item.frequency}</span>
+                    </div>
                     <div className="flex items-center gap-2">
                       <Clock className="h-4 w-4 text-amber-400 shrink-0" />
                       <span>{item.time}</span>
@@ -79,13 +89,19 @@ export default function WeeklySchedule() {
                   </p>
                 </div>
 
-                <div className="mt-8 pt-4 border-t border-white/10">
+                <div className="mt-8 pt-4 border-t border-white/10 flex items-center justify-between">
+                  <Link
+                    href="/events"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-400 transition hover:text-amber-300"
+                  >
+                    <span>VIEW EVENT DETAILS</span>
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </Link>
                   <Link
                     href="/contact"
-                    className="inline-flex items-center gap-2 text-xs font-bold text-amber-400 transition hover:text-amber-300"
+                    className="text-xs font-semibold text-gray-400 hover:text-white transition"
                   >
-                    <span>GET ACCESS DETAILS</span>
-                    <ArrowRight className="h-3.5 w-3.5" />
+                    Get Link
                   </Link>
                 </div>
               </div>

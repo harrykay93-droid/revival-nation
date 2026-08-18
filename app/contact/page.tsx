@@ -34,6 +34,28 @@ export default function ContactPage() {
                   </p>
 
                   <div className="space-y-4 text-sm">
+                    {/* WhatsApp Direct */}
+                    <div className="flex items-start gap-3.5 rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-3.5 transition hover:border-emerald-500/60 hover:bg-emerald-500/15">
+                      <div className="rounded-lg border border-emerald-500/40 bg-emerald-500/20 p-2 text-emerald-400 shrink-0">
+                        <svg className="h-5 w-5 fill-current" viewBox="0 0 24 24">
+                          <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-5.805 1.524zm6.204-3.848l.37.22c1.472.873 3.164 1.333 4.887 1.334 5.228 0 9.48-4.251 9.483-9.482.002-2.536-.987-4.92-2.784-6.718-1.797-1.797-4.181-2.786-6.721-2.787-5.228 0-9.48 4.252-9.483 9.482-.001 1.77.478 3.5 1.385 5.006l.241.398-.999 3.649 3.738-.981zm11.39-7.795c-.097-.161-.355-.257-.741-.451-.387-.193-2.288-1.129-2.643-1.258-.354-.129-.612-.193-.87.193s-.998 1.258-1.224 1.516c-.225.258-.451.29-.838.097-.387-.194-1.633-.602-3.11-1.92-1.149-1.025-1.926-2.29-2.152-2.677-.225-.387-.024-.596.17-.789.175-.174.387-.451.58-.677.194-.226.258-.387.387-.645.129-.258.064-.484-.032-.677-.097-.194-.87-2.097-1.192-2.871-.314-.755-.632-.653-.87-.665l-.741-.013c-.258 0-.677.097-1.031.484-.355.387-1.354 1.322-1.354 3.226s1.387 3.742 1.58 4.001c.193.258 2.73 4.168 6.613 5.845.924.399 1.645.638 2.207.817.928.295 1.772.253 2.44.153.744-.112 2.288-.936 2.611-1.839.322-.903.322-1.677.225-1.839z"/>
+                        </svg>
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-emerald-300">WhatsApp Direct</h4>
+                        <p className="text-xs text-gray-300 mb-2">Instant response & direct prayer connection</p>
+                        <a
+                          href={siteConfig.contact.whatsapp}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 rounded-lg bg-emerald-500 px-3 py-1.5 text-xs font-bold text-black transition hover:bg-emerald-400 active:scale-95"
+                        >
+                          <span>Chat on WhatsApp</span>
+                          <span aria-hidden="true">→</span>
+                        </a>
+                      </div>
+                    </div>
+
                     {/* Official Email */}
                     <div className="flex items-start gap-3.5">
                       <div className="rounded-lg border border-amber-500/30 bg-amber-500/10 p-2.5 text-amber-400 shrink-0">
@@ -69,9 +91,9 @@ export default function ContactPage() {
                         <Calendar className="h-5 w-5" />
                       </div>
                       <div>
-                        <h4 className="font-semibold text-gray-200">Online Prayer Altar</h4>
+                        <h4 className="font-semibold text-gray-200">Online Intercessory Altar</h4>
                         <p className="text-gray-400">
-                          Every Tue & Thu — 8:00 PM (WAT)
+                          Every Monday — 9:00 PM (WAT)
                         </p>
                       </div>
                     </div>

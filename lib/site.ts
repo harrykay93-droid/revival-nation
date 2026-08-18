@@ -13,17 +13,19 @@ export const siteConfig = {
   },
 
   schedule: {
-    weeklyPrayer: "Every Tuesday & Thursday — 8:00 PM (Online Altar)",
-    monthlyRevival: "Last Saturday of the Month — 4:00 PM",
-    youthWatch: "Every 2nd & 4th Sunday — 5:00 PM",
+    weeklyPrayer: "Every Monday — 9:00 PM (WAT) (Online Intercessory Altar)",
+    monthlyRevival: "Once Every Month — Different Churches / Stream",
+    yearlyCrusade: "Every August — Open Air / Open Space",
   },
 
   contact: {
     email: "revivalnation40@gmail.com",
+    whatsapp: "https://wa.me/qr/L2YIX5MQH3O4E1",
     address: "RCCG Calvary Parish, Itire, Surulere, Lagos, Nigeria",
   },
 
   social: {
+    whatsapp: "https://wa.me/qr/L2YIX5MQH3O4E1",
     youtube: "https://youtube.com/@revivalnation",
     facebook: "https://facebook.com/revivalnation",
     instagram: "https://instagram.com/revivalnation",
