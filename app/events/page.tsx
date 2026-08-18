@@ -12,24 +12,24 @@ export const metadata = {
 const recurringEvents = [
   {
     title: "Online Intercessory Altar",
-    schedule: "Every Tuesday & Thursday — 8:00 PM (WAT)",
+    schedule: "Every Monday - 9:00 PM (WAT)",
     location: "Online (Virtual Altar)",
     description: "A focused space of passionate prayer, spiritual warfare, and seeking the Lord for souls and revival.",
     tag: "Weekly",
   },
   {
     title: "Monthly Revival Hour",
-    schedule: "Last Saturday of Each Month — 4:00 PM",
-    location: "RCCG Calvary Parish Grounds / Stream",
-    description: "A dedicated sacred service characterized by deep worship, prophetic teaching, and ministry to the sick and weary.",
+    schedule: "Once Every Month",
+    location: "Different Churches / Stream",
+    description: "A dedicated sacred service characterized by deep worship, prophetic teaching, and intense prayers.",
     tag: "Monthly",
   },
   {
-    title: "Youth & Campus Fellowship",
-    schedule: "2nd & 4th Sunday — 5:00 PM",
-    location: "Ministry Center",
-    description: "Equipping young people, students, and young professionals to lead consecrated lives of impact.",
-    tag: "Bi-Weekly",
+    title: "Yearly Crusade",
+    schedule: "Every August",
+    location: "Open Air/Open Space",
+    description: "Major event of the Year characterized by intense prayers, worship, and the word",
+    tag: "Yearly",
   },
 ];
 

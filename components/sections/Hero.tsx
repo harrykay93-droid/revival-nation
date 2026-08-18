@@ -9,7 +9,7 @@ export default function Hero() {
   const stats = [
     {
       icon: Users,
-      value: "5,000+",
+      value: "CONTINOUSLY",
       label: "TOUCHING LIVES",
     },
     {
