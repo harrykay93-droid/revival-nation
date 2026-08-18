@@ -10,7 +10,7 @@ export default function Hero() {
     {
       icon: Users,
       value: "5,000+",
-      label: "LIVES TOUCHED",
+      label: "TOUCHING LIVES",
     },
     {
       icon: FlameKindling,
