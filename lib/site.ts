@@ -28,7 +28,7 @@ export const siteConfig = {
     whatsapp: "https://wa.me/qr/L2YIX5MQH3O4E1",
     youtube: "https://youtube.com/@revivalnation",
     facebook: "https://facebook.com/revivalnation",
-    instagram: "https://instagram.com/revivalnation",
+    instagram: "https://www.instagram.com/revivalnation8/",
     tiktok: "https://tiktok.com/@revivalnation",
   },
 };

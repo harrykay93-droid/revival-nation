@@ -12,9 +12,9 @@ type AccountDetail = {
 
 const accounts: AccountDetail[] = [
   {
-    bank: "Guaranty Trust Bank (GTB)",
-    accountName: "Revival Nation Ministry",
-    accountNumber: "0123456789",
+    bank: "Moniepoint MFB",
+    accountName: "HARRISON ADEKUNLE (Itire 4 JESUS)",
+    accountNumber: "8176089668",
     purpose: "General Giving & Event Support",
   },
   {
