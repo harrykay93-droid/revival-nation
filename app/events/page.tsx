@@ -43,7 +43,7 @@ const pastConferences = [
     description:
       "A landmark gathering uniting believers across generations for hours of fervent prayer, repentance, worship, and spiritual renewal. Hundreds were reignited and commissioned.",
     highlights: ["Spontaneous worship & prayer", "Prophetic impartation", "Lives healed & transformed"],
-    gallerySlug: "/gallery",
+    gallerySlug: "/gallery/revival-fire-2026",
   },
   {
     title: "YOU_CAN 2025",

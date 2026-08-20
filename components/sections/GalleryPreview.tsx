@@ -8,20 +8,36 @@ import { ArrowRight, Images } from "lucide-react";
 
 const albums = [
   {
-    title: "YOU_CAN 2025",
-    subtitle: "May 2025 Gathering",
-    description: "65 photos capturing worship, fellowship, and ministry moments.",
-    src: "/images/hero-bg.jpg",
-    href: "/gallery/may-2025-you-can",
-    photoCount: 65,
+    title: "REVIVAL FIRE 2026",
+    subtitle: "Landmark Assembly — August 2026",
+    description: "100 photos capturing the fire, fervent prayers, and life-changing moments at RCCG Calvary Parish, Itire.",
+    src: "/images/gallery/revival-fire-2026/revival-fire-01.jpg",
+    href: "/gallery/revival-fire-2026",
+    photoCount: 100,
+  },
+  {
+    title: "REVIVAL HOUR",
+    subtitle: "July 2026 Gathering",
+    description: "Moments of worship, altar communion, and seeking the face of God during July Revival Hour.",
+    src: "/images/gallery/revival-hour-july-2026/revival-hour-july-01.jpg",
+    href: "/gallery/revival-hour-july-2026",
+    photoCount: 10,
   },
   {
     title: "REVIVAL HOUR",
     subtitle: "September 2025 Service",
-    description: "36 photos of intense prayer, praise, and community encounter.",
-    src: "/images/about.png",
+    description: "36 photos of intense prayer, praise, and community spiritual encounter.",
+    src: "/images/gallery/revival-hour-sept-2025/1.jpg",
     href: "/gallery/revival-hour-sept-2025",
     photoCount: 36,
+  },
+  {
+    title: "YOU_CAN 2025",
+    subtitle: "May 2025 Gathering",
+    description: "65 photos capturing worship, fellowship, and ministry moments.",
+    src: "/images/gallery/may-2025-you_can/IMG_2169.jpg",
+    href: "/gallery/may-2025-you-can",
+    photoCount: 65,
   },
 ];
 

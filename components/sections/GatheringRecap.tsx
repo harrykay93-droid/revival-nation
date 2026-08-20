@@ -58,11 +58,11 @@ export default function GatheringRecap() {
             {/* Actions */}
             <div className="pt-4 flex flex-wrap items-center gap-4">
               <Link
-                href="/gallery"
+                href="/gallery/revival-fire-2026"
                 className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-amber-500 to-amber-400 px-6 py-3 text-sm font-bold text-black shadow-lg shadow-amber-500/20 transition hover:scale-105 hover:bg-amber-300"
               >
                 <Images className="h-4 w-4 fill-black text-black" />
-                VIEW EVENT PHOTOS
+                VIEW EVENT PHOTOS (100)
               </Link>
               <Link
                 href="/testimonies"
@@ -81,7 +81,7 @@ export default function GatheringRecap() {
               <div className="relative overflow-hidden rounded-3xl border border-amber-500/40 bg-zinc-900 shadow-2xl p-6 backdrop-blur-md space-y-6">
                 <div className="relative h-60 w-full overflow-hidden rounded-2xl">
                   <Image
-                    src="/images/hero-bg.jpg"
+                    src="/images/gallery/revival-fire-2026/revival-fire-01.jpg"
                     alt="Revival Fire 2026 Moment"
                     fill
                     className="object-cover object-center"

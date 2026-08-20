@@ -19,8 +19,8 @@ const accounts: AccountDetail[] = [
   },
   {
     bank: "Zenith Bank",
-    accountName: "Revival Nation Project Account",
-    accountNumber: "9876543210",
+    accountName: "Harrison Adekunle Elisha",
+    accountNumber: "4212672945",
     purpose: "Outreach & Community Care",
   },
 ];
